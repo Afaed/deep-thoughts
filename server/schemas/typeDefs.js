@@ -29,10 +29,24 @@ type User {
   }
 
   type Query {
+      me: User
     users: [User]
     user(username : String!): User
     thoughts(username: String): [Thought]
     thought(_id: ID!): Thought
+  }
+
+  type Mutation {
+      login(email: String!, password: String!): Auth
+      addUser(username: String!, email: String!, password: String!): Auth
+      addThought(thoughtText: String!): Thought
+      addReaction(thoughtId: ID!, reactionBody: String!): Thought
+      addFriend(friendId: ID!): User
+  }
+
+  type Auth {
+      token: ID!
+      user: User
   }
 `;
 
@@ -48,4 +62,8 @@ module.exports = typeDefs;
 } 
 
 In this example, the mutation—called addPost()—accepts arguments for a title and body. Like with queries, you can specify which properties you want returned. In the case of a mutation, it's usually helpful to have the newly created _id returned.
+
+Don't forget that the ! character in a GraphQL query indicates a required argument. Thus, a user can't be created without a username, email, and password.
+
+Note that addReaction() will return the parent Thought instead of the newly created Reaction. This is because the front end will ultimately track changes on the thought level, not the reaction level.
 */
