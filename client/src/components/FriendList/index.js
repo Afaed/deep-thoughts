@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
-const FriendLost = ({ friendCount, username, friends }) => {
+const FriendList = ({ friendCount, username, friends }) => {
     if (!friends || !friends.length) {
         return <p className="bg-dark text-light p-3">{username}, make a friend!</p>
     }
@@ -20,4 +20,4 @@ const FriendLost = ({ friendCount, username, friends }) => {
     )
 };
 
-export default FiendList;
+export default FriendList;

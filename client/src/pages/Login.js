@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Auth from '../utils/auth'
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
 
@@ -11,6 +11,16 @@ const Login = (props) => {
       ...formState,
       [name]: value,
     });
+
+    try {
+      const { data } = Login({
+        variables: { ...formState }
+      });
+    
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    };
   };
 
   // submit form
@@ -23,6 +33,8 @@ const Login = (props) => {
       password: '',
     });
   };
+  
+  
 
   return (
     <main className='flex-row justify-center mb-4'>

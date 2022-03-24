@@ -36,6 +36,35 @@ mutation addFriend($id: ID!) {
         }
     }
 }`
+
+export const ADD_THOUGHT = gql `
+mutation addThought($thoughtText: String!) {
+    addThought(thoughtText: $thoughtText) {
+        _id
+        thoughtText
+        createdAt
+        username
+        reactionCount
+        reactions {
+            _id
+        }
+    }
+}`
+
+export const ADD_REACTION = gql `
+mutation addReaction($thoughtId: ID!, $reactionBody:String!) {
+    addReaction(thoughtId: $thoughtId, reactionBody: $reactionBody){
+        _id
+        reactionCount
+        reactions {
+            _id
+            reactionBody
+            createdAt
+            username
+        }
+    }
+}
+`
 //Recall that the ADD_USER mutation from this file was passed to the useMutation Hook in the Signup component. We'll do something similar in the Profile component.
 
 //we don't need to decalre a query here as its implied.
